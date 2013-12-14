@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= pkg.name %></title>
+    <link rel="stylesheet" type="text/css" href="css/app.css" media="all" />
+  </head>
+  <body>
+  <div data-ng-app="strapper">
+    <div data-ng-controller="Tables">
+      <div>
+        <input type="text" data-ng-model="applicationName" placeholder="application name" />
+      </div>
+      <div>
+        <input type="text" data-ng-model="databaseName" placeholder="database name" />
+      </div>
+      <div>
+        <input type="text" data-ng-model="databasePrefix" placeholder="database prefix" />
+      </div>
+      <input type="text" data-ng-model="newTable.name" placeholder="name" />
+      <button data-ng-click="addTable()">add</button>
+      <div data-ng-repeat="table in tables" class="table">
+        <h2>{{dbPrefix()}}{{table.name}}</h2>
+        <div class="table-content">
+          <div data-ng-repeat="field in table.fields" class="field">
+            <span class="field-name">{{field.name}}</span>
+            <span class="field-type">{{field.type}}</span>
+          </div>
+          <input type="text" data-ng-model="table.newField.name" placeholder="name" />
+          <select data-ng-model="table.newField.type" data-ng-options="datatype for datatype in table.datatypes()"></select>
+          <button data-ng-click="table.addField()">add</button>
+        </div>
+      </div>
+      <ul>
+        <li><a href="javascript:void(0);" id="result-sql-show" data-ng-click="setTab('result-sql')">sql</a></li>
+        <li><a href="javascript:void(0);" id="result-class-show" data-ng-click="setTab('result-class')">class</a></li>
+      </ul>
+      <div id="result-sql" ng-show="tabVisible('result-sql')" class="code code-sql">
+        <pre>
+{{compiledSql()}}
+        </pre>
+      </div>
+      <div id="result-class" ng-show="tabVisible('result-class')" class="code code-csharp">
+        <pre>
+{{compiledClass()}}
+        </pre>
+      </div>
+      <button data-ng-click="submitJson()">submit</button>
+
+      <div class="result-sql">
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="js/app.js"></script>
+  </body>
+</html>
