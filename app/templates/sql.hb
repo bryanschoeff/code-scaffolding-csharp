@@ -1,4 +1,4 @@
-USE [{{ databaseName }}]
+USE [{{sqlDatabaseName}}]
 GO
 
 {{#each tables}}

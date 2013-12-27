@@ -9,10 +9,9 @@ class strapper.models.Table
     ["int","decimal","varchar","text","bit"]
 
   addField: ->
-    @fields.push @newField
-    @newField = new strapper.models.Field
-
-  # helper methods for applying formatted information to the templates
+    if @newField.name != "" && @newField.type != ""
+      @fields.push @newField
+      @newField = new strapper.models.Field
 
   applicationName: ->
     util.capitalize(@parent.applicationName)

@@ -19,10 +19,10 @@
       <input type="text" data-ng-model="newTable.name" placeholder="name" />
       <button data-ng-click="addTable()">add</button>
       <div data-ng-repeat="table in tables" class="table">
-        <h2>{{dbPrefix()}}{{table.name}}</h2>
+        <h2>{{table.sqlTableName()}}</h2>
         <div class="table-content">
           <div data-ng-repeat="field in table.fields" class="field">
-            <span class="field-name">{{field.name}}</span>
+            <span class="field-name">{{field.capitalizedName()}}</span>
             <span class="field-type">{{field.type}}</span>
           </div>
           <input type="text" data-ng-model="table.newField.name" placeholder="name" />
@@ -36,12 +36,16 @@
       </ul>
       <div id="result-sql" ng-show="tabVisible('result-sql')" class="code code-sql">
         <pre>
+        <code>
 {{compiledSql()}}
+        </code>
         </pre>
       </div>
       <div id="result-class" ng-show="tabVisible('result-class')" class="code code-csharp">
         <pre>
+        <code>
 {{compiledClass()}}
+        </code>
         </pre>
       </div>
       <button data-ng-click="submitJson()">submit</button>
